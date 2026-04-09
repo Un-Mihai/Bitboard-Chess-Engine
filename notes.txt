@@ -5,9 +5,52 @@ Bitboard - numar unsigned long long, 64 de biti care reprezinta pozitii de pe ta
 
 DE IMPLEMENTAT
 
+------Implementarea bazei jocului-----------
+
 Print Bitboard
 Enum pentru campuri (a1, b4 etc) si pentru white/black
 Set/unset/get bit
 
 Initializare bitboard-uri cu pozitiile atacate pentru fiecare piesa pentru fiecare camp:
 -pentru pioni, cai si rege cu shiftari
+
+Calculare mutari pentru nebun, tura, regina 
+-- Magic Bitboards?
+
+Determinare bitboard cu pozitiile atacate de catre inamic -- pentru determinarea sah-ului 
+-imbinarea cu OR (|) a posibilelor mutari ale inamicului
+
+
+
+-----------Implementarea jocului in sine doar cu input de la utilizator (prima oara in consola propun)-----------
+
+Citirea mutarilor de la tastatura pentru fiecare jucator
+-citim mutare (Patrat_Ales - Patrat_Destinatie), nu stiu daca sa folosim notatille de sah default ca ne complicam putin, poate sa fie o chestie de viitor
+-validam si realizam mutarea
+
+
+
+-----------Implementarea bot-ului---------------
+
+Functie de evaluare a tablei
+-returneaza scorul pentru o culoare (alb/negru) in situatia unei table date
+
+Algoritmul Minimax (cu Alpha-Beta pruning ca probabil crapa fara)
+-parcurge arborele de joc pentru a calcula cea mai buna mutare
+
+
+-----------Implementarea Logicii Jocului cu UI-----------
+
+Ecran de ales mod de joc (culoarea si tipul de adversar om/bot)
+
+Main Loop
+-preluam input de la utlilizator
+-inputul este transmis catre joc in sine prin adaptarea functiei ce citea mutarile din consola
+-intram in modul desenat si afisam starea actuala a jocului
+-daca jocul e gata afisam ecran de final, evenual optiune de meniu/restart
+
+
+-----------Idei de implementat pe viitor------------
+
+Joc Multiplayer in LAN folosind socket-uri
+Nivele de inteligenta pentru bot
