@@ -1,0 +1,13 @@
+CONCEPTE
+
+Bitboard - numar unsigned long long, 64 de biti care reprezinta pozitii de pe tabla de sah
+
+
+DE IMPLEMENTAT
+
+Print Bitboard
+Enum pentru campuri (a1, b4 etc) si pentru white/black
+Set/unset/get bit
+
+Initializare bitboard-uri cu pozitiile atacate pentru fiecare piesa pentru fiecare camp:
+-pentru pioni, cai si rege cu shiftari
