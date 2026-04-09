@@ -6,11 +6,20 @@
 #include "Board.hpp" //header in care tinem bitboardurile si functiile generale (de ex avem print ul acum)
 
 /*
-In Types.hpp am incapsulat enum urile in namespaceuri pentru ca sa nu fie ceva probleme mai incolo
-Ce-i drept pozitiile a1, a2... nu ne incurca ca o nu folosim numele astea, dar cel putin pentru piese
-ma gandeam ca e bine sa le avem in namespace ca na sunt litere normale si sa se inteleaga in cod ce e cu litera aia cand o folosim.
+   In Types.hpp am incapsulat enum urile in namespaceuri pentru ca sa nu fie ceva probleme mai incolo
+   Ce-i drept pozitiile a1, a2... nu ne incurca ca o nu folosim numele astea, dar cel putin pentru piese
+   ma gandeam ca e bine sa le avem in namespace ca na sunt litere normale si sa se inteleaga in cod ce e cu litera aia cand o folosim.
 
-Poti sa modifici ce vrei daca ai ale idei :))
+   Poti sa modifici ce vrei daca ai ale idei :))
+*/
+
+/*
+   In fisierele .hpp variablele le am declarat inline ca sa nu fie probleme de linking intre fisiere dupa
+   Cam tot ce definim direct in .hpp trebuie sa fie inline
+   Daca doar declaram, si apoi definim in .cpp, nu trebuie sa fie inline (la variabile trebuie specificat extern in .hpp, si apoi in .cpp sa fie definita fara extern)
+   Penru Types si pentru BitManipulation nu am mai facut fisiere .cpp pentru ca nu au mult continut
+   De asemenea "inline" la functii sugereaza compilatorului sa le insereze direct acolo unde sunt apelate,
+   dar e doar o sugestie, oricum stie el cum e mai bine si face cum vrea
 */
 
 int main() {

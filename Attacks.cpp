@@ -5,7 +5,7 @@
 #include "Board.hpp"
 
 void functieExemplu() {
-   setBit(main_bitboard, Squares::e4);
+   setBit(main_bitboard, Squares::e5);
    printBitboard(main_bitboard);
    printBitboard(white_pawns);
    clearBit(main_bitboard, Squares::e4);
