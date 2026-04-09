@@ -58,5 +58,6 @@ void printBitboard(uint64_t bitboard) {
 }
 
 int main() {
-   
-}
+    std::cout << "Hello World!" << std::endl;
+    return 0;
+} 

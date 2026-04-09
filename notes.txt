@@ -2,6 +2,10 @@ CONCEPTE
 
 Bitboard - numar unsigned long long, 64 de biti care reprezinta pozitii de pe tabla de sah
 
+Magic bitboard:
+Pentru fiecare camp de pe tabla vom avea o lista de x posibile configuratii de mutari posibile adica un array [64][x] de ULL
+Indexul x se afla inmultind bitboard-ul curent cu piesele de pe tabla cu un numar "magic".
+Acest numar magic este folosit atat la crearea array-ului cat si la accesarea valorii.
 
 DE IMPLEMENTAT
 
@@ -9,13 +13,19 @@ DE IMPLEMENTAT
 
 Print Bitboard
 Enum pentru campuri (a1, b4 etc) si pentru white/black
+Array de coordonate (pentru traducere numar camp in coordonata)
 Set/unset/get bit
 
 Initializare bitboard-uri cu pozitiile atacate pentru fiecare piesa pentru fiecare camp:
 -pentru pioni, cai si rege cu shiftari
+-pentru nebun si tura cu magic se marcheaza toate campurile pe care ar putea exista o piesa ce ar obstructiona traiectoria(daca piesa e pe marginea tablei nu obstructioneaza)
+-apoi tot pentru nebun si tura functii care primesc campul si bitboard-ul cu blocajele si returneaza bitboard cu campurile unde poate ajunge inclusiv prin capturare
 
 Calculare mutari pentru nebun, tura, regina 
--- Magic Bitboards?
+-- Magic Bitboards
+
+Functie de bit count pentru un bitboard
+Functie care gaseste indexul celui mai putin semnificativ bit(cel mai din stanga)
 
 Determinare bitboard cu pozitiile atacate de catre inamic -- pentru determinarea sah-ului 
 -imbinarea cu OR (|) a posibilelor mutari ale inamicului
