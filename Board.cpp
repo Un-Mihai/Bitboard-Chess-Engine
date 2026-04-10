@@ -27,3 +27,8 @@ void init_knight_attacks(){
    for (int square = 0; square < 64; square ++)
       knight_attacks[square] = generate_knight_attacks(square);
 }
+
+void init_king_attacks(){
+   for (int square = 0; square < 64; square ++)
+      king_attacks[square] = generate_king_attacks(square);
+}

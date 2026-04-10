@@ -36,6 +36,7 @@ inline const U64 empty_gh_file = 4557430888798830399ULL;
 //Pieces attacks for all squares
 inline U64 knight_attacks[64];
 inline U64 pawn_attacks[2][64];
+inline U64 king_attacks[64];
 
 //--------------------------------------------//
 
@@ -47,3 +48,6 @@ void init_pawn_attacks();
 
 //initialize the knight attacks array
 void init_knight_attacks();
+
+//initialize the king attacks array
+void init_king_attacks();
