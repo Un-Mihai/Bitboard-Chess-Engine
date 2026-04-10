@@ -37,7 +37,7 @@ int main() {
    // for (int i = 0; i < 64; i ++)
    //    printBitboard(knight_attacks[i]);
 
-   //uint64_t b = 0ULL;
+   uint64_t b = 0ULL;
    // for(int rank = 0; rank < 8; rank ++){
    //    for (int file = 0; file < 6; file ++){
    //       setBit(b, rank * 8 + file);
@@ -53,5 +53,11 @@ int main() {
 
    // printBitboard(generate_bishop_attacks(Squares::d4, b));
    //printBitboard(generate_bishop_blocks(Squares::d1));
+
+   // printBitboard( 
+   //    generate_one_occupancy(
+   //       generate_bishop_blocks(Squares::d4), 509
+   //    )
+   // );
    
 } 

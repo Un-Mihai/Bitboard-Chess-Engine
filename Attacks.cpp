@@ -18,8 +18,6 @@ U64 generate_knight_attacks (int square){
    U64 knight_position_bitboard = 0ULL;
    setBit(knight_position_bitboard, square);
 
-   //15,17,6,10
-
    //---------- LEFT SIDE ATTACKS -----------
    
    //if the knight is not placed on files a or b can go anywhere left
@@ -131,6 +129,24 @@ U64 generate_bishop_attacks(int square, U64 blocks){\
    }
 
    return attacks;
+}
+
+U64 generate_one_occupancy(U64 blocks, int index) {
+    U64 occupancy = 0ULL;
+
+    //loop over all the possible occupancies
+    while (blocks) {
+        int square = first_lsb(blocks);
+        clearBit(blocks, square);
+
+        // if least significant bit of index is 1 than we keep the square occupied
+        if (index & 1)
+            setBit(occupancy, square);
+
+        index >>= 1;  //move to the next bit
+    }
+
+    return occupancy;
 }
 
 //fisierul incepe sa fie mai voluminos decat credeam... imi zici daca crezi ca e nevoie de o restructurare la fisiere
