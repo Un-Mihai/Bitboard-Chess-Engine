@@ -36,6 +36,7 @@ Determinare bitboard cu pozitiile atacate de catre inamic -- pentru determinarea
 
 Citirea mutarilor de la tastatura pentru fiecare jucator
 -citim mutare (Patrat_Ales - Patrat_Destinatie), nu stiu daca sa folosim notatille de sah default ca ne complicam putin, poate sa fie o chestie de viitor
+avantaj notatie standard: daca o implementam de acum, pe viitor putem genera usor partida in format text si o putem folosi si in afisarea analizelor (ca pe chess.com)
 -validam si realizam mutarea
 
 

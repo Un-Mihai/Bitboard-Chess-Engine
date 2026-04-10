@@ -12,10 +12,10 @@ void functieExemplu() {
    printBitboard(main_bitboard);
 }
 
-uint64_t generate_knight_attacks (int square){
-   uint64_t attacks = 0ULL;
+U64 generate_knight_attacks (int square){
+   U64 attacks = 0ULL;
 
-   uint64_t knight_position_bitboard = 0ULL;
+   U64 knight_position_bitboard = 0ULL;
    setBit(knight_position_bitboard, square);
 
    //15,17,6,10
@@ -65,3 +65,72 @@ uint64_t generate_knight_attacks (int square){
    
    return attacks;
 }
+
+U64 generate_bishop_blocks(int square){
+   U64 blocks = 0ULL;
+
+   //calculate bishop coordinates
+   int bishop_rank = square / 8;
+   int bishop_file = square % 8;
+
+   //skip the edges because a piece on the edge doesn't block the bishop
+
+   //loop towards bottom right corner
+   for ( int rank = bishop_rank + 1, file = bishop_file + 1; rank <= 6 && file <= 6; rank ++, file ++)
+      setBit(blocks, rank * 8 + file);
+
+   //loop towards upper right corner
+   for ( int rank = bishop_rank - 1, file = bishop_file + 1; rank >= 1 && file <= 6; rank --, file ++)
+      setBit(blocks, rank * 8 + file);
+
+   //loop towards bottom left corner
+   for ( int rank = bishop_rank + 1, file = bishop_file - 1; rank <= 6 && file >= 1; rank ++, file --)
+      setBit(blocks, rank * 8 + file);
+
+   //loop towards upper left corner
+   for ( int rank = bishop_rank - 1, file = bishop_file - 1; rank >= 1 && file >= 1; rank --, file --)
+      setBit(blocks, rank * 8 + file);
+
+   return blocks;
+}
+
+U64 generate_bishop_attacks(int square, U64 blocks){\
+   U64 attacks = 0ULL;
+
+   //calculate bishop coordinates
+   int bishop_rank = square / 8;
+   int bishop_file = square % 8;
+
+   //loop towards bottom right corner
+   for ( int rank = bishop_rank + 1, file = bishop_file + 1; rank <= 7 && file <= 7; rank ++, file ++){
+      int current_square = rank * 8 + file;
+      setBit(attacks, current_square);
+      if (getBit(blocks, current_square)) break;
+
+   }
+      
+   //loop towards upper right corner
+   for ( int rank = bishop_rank - 1, file = bishop_file + 1; rank >= 0 && file <= 7; rank --, file ++){
+      int current_square = rank * 8 + file;
+      setBit(attacks, current_square);
+      if (getBit(blocks, current_square)) break;
+   }
+
+   //loop towards bottom left corner
+   for ( int rank = bishop_rank + 1, file = bishop_file - 1; rank <= 7 && file >= 0; rank ++, file --){
+      int current_square = rank * 8 + file;
+      setBit(attacks, current_square);
+      if (getBit(blocks, current_square)) break;
+   }
+
+   //loop towards upper left corner
+   for ( int rank = bishop_rank - 1, file = bishop_file - 1; rank >= 0 && file >= 0; rank --, file --){
+      int current_square = rank * 8 + file;
+      setBit(attacks, current_square);
+      if (getBit(blocks, current_square)) break;
+   }
+
+   return attacks;
+}
+
+//fisierul incepe sa fie mai voluminos decat credeam... imi zici daca crezi ca e nevoie de o restructurare la fisiere
