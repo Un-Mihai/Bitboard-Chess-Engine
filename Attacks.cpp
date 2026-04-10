@@ -4,14 +4,6 @@
 #include "BitManipulation.hpp"
 #include "Board.hpp"
 
-void functieExemplu() {
-   setBit(main_bitboard, Squares::e5);
-   printBitboard(main_bitboard);
-   printBitboard(white_pawns);
-   clearBit(main_bitboard, Squares::e4);
-   printBitboard(main_bitboard);
-}
-
 U64 generate_knight_attacks (int square){
    U64 attacks = 0ULL;
 
@@ -204,6 +196,70 @@ U64 generate_one_occupancy(U64 blocks, int index) {
     }
 
     return occupancy;
+}
+
+U64 generate_rook_blocks(int square){
+
+   U64 blocks = 0ULL;
+
+   //get the rook's position
+   int rook_rank = square / 8;
+   int rook_file = square % 8;
+
+   //loop vertically
+   for(int rank = 1; rank < 7; rank ++){
+      setBit(blocks, rank * 8 + rook_file);
+   }
+
+   //loop horizontally
+   for(int file = 1; file < 7; file ++){
+      setBit(blocks, rook_rank * 8 + file);
+   }
+
+   //clear the bit that represents the rook's position
+   clearBit(blocks, square);
+
+   return blocks;
+}
+
+U64 generate_rook_attacks(int square, U64 blocks){
+
+   U64 attacks = 0ULL;
+
+   //get the rook's position
+   int rook_rank = square / 8;
+   int rook_file = square % 8;
+
+   //loop up
+   for(int rank = rook_rank + 1; rank < 8; rank ++){
+      int current_square = rank * 8 + rook_file;
+      setBit(attacks, current_square);
+      if(getBit(blocks, current_square)) break;
+   }
+
+   //loop down
+   for(int rank = rook_rank - 1; rank > -1; rank --){
+      int current_square = rank * 8 + rook_file;
+      setBit(attacks, current_square);
+      if(getBit(blocks, current_square)) break;
+   }
+
+   //loop right
+   for(int file = rook_file + 1; file < 8; file ++){
+      int current_square = rook_rank * 8 + file;
+      setBit(attacks, current_square);
+      if(getBit(blocks, current_square)) break;
+   }
+
+   //loop left
+   for(int file = rook_file - 1; file > -1; file --){
+      int current_square = rook_rank * 8 + file;
+      setBit(attacks, current_square);
+      if(getBit(blocks, current_square)) break;
+   }
+
+   return attacks;
+   
 }
 
 //fisierul incepe sa fie mai voluminos decat credeam... imi zici daca crezi ca e nevoie de o restructurare la fisiere
