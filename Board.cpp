@@ -15,6 +15,14 @@ void printBitboard(U64 bitboard) {
    std::cout << "Bitboard: " << bitboard << "\n\n";
 }
 
+void init_pawn_attacks(){
+   for (int square = 0; square < 64; square ++){
+      pawn_attacks[white][square] = generate_pawn_attacks(square, white);
+      pawn_attacks[black][square] = generate_pawn_attacks(square, black);
+   }
+   
+}
+
 void init_knight_attacks(){
    for (int square = 0; square < 64; square ++)
       knight_attacks[square] = generate_knight_attacks(square);

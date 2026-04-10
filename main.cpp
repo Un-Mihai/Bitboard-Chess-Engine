@@ -24,7 +24,10 @@
 
 int main() {
    
+   init_pawn_attacks();
    init_knight_attacks();
+
+   printBitboard(pawn_attacks[black][Squares::e1]);
 
    // printBitboard(white_pawns);
    // setBit(main_bitboard, Squares::e4);

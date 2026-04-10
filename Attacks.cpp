@@ -66,6 +66,36 @@ U64 generate_knight_attacks (int square){
    return attacks;
 }
 
+U64 generate_pawn_attacks(int square, int color){
+   
+   U64 attacks = 0ULL;
+
+   U64 pawn_position_bitboard = 0ULL;
+   setBit(pawn_position_bitboard, square);
+
+   //if the color is white the pawn shifts right else it shifts left
+   if (color == white){
+
+      //prevent the pawn from capturing on the h file from the a file
+      if(pawn_position_bitboard & empty_a_file) 
+         attacks |= (pawn_position_bitboard >> 9);
+      
+      //prevent the pawn from capturing on the a file from the h file
+      if(pawn_position_bitboard & empty_h_file)
+         attacks |= (pawn_position_bitboard >> 7);
+   }
+
+   //conditions are inverted for the black pawns
+   else {
+      if(pawn_position_bitboard & empty_a_file) 
+         attacks |= (pawn_position_bitboard << 7);
+      if(pawn_position_bitboard & empty_h_file)
+         attacks |= (pawn_position_bitboard << 9);
+   }
+
+   return attacks;
+}
+
 U64 generate_bishop_blocks(int square){
    U64 blocks = 0ULL;
 
