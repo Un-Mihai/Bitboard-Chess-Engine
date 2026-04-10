@@ -8,7 +8,13 @@
 void functieExemplu();
 
 //mark the bits a knight can go from a given square (side doesn't matter)
-uint64_t generate_knight_attacks (int square);
+U64 generate_knight_attacks (int square);
+
+//mark the bits a pawn can attack (diagonals) (sides matter)
+U64 generate_pawn_attacks(int square, int color);
+
+//mark the bits a king can attack (check not accounted for) (side doesn't matter)
+U64 generate_king_attacks(int square);
 
 //mark the positions that could block a bishop placed on a given square (side doesn't matter)
 U64 generate_bishop_blocks(int square);
