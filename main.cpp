@@ -26,6 +26,7 @@ int main() {
    
    init_knight_attacks();
 
+
    // printBitboard(white_pawns);
    // setBit(main_bitboard, Squares::e4);
    // printBitboard(main_bitboard);
@@ -43,4 +44,7 @@ int main() {
    //    }
    // }
    // printBitboard(b);
+   
+   // std :: cout << first_lsb(b);
+   
 } 

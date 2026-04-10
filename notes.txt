@@ -64,3 +64,12 @@ Main Loop
 
 Joc Multiplayer in LAN folosind socket-uri
 Nivele de inteligenta pentru bot
+
+
+------------ Flaguri la compilare -------------------
+Am adaugat 3 flaguri:
+-O3 (activeaza optimizari avansate precum vectorizarea buclelor)
+-march=native (permite compilatorului sa foloseasca niste instructiuni direct pe procesor - am folosit la bit manipulation)
+-flto (permite sa se faca inlocuirile inline a functiilor declarate intr-un fisier si folosite in altul)
+
+Vezi readme pentru utlizare.
