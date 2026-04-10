@@ -23,8 +23,24 @@
 */
 
 int main() {
-   printBitboard(white_pawns);
-   setBit(main_bitboard, Squares::e4);
-   printBitboard(main_bitboard);
-   functieExemplu();
+   
+   init_knight_attacks();
+
+   // printBitboard(white_pawns);
+   // setBit(main_bitboard, Squares::e4);
+   // printBitboard(main_bitboard);
+   // functieExemplu();
+
+   //----- TEMPORARY CODE(might be reused) ----------
+
+   // for (int i = 0; i < 64; i ++)
+   //    printBitboard(knight_attacks[i]);
+
+   // uint64_t b = 0ULL;
+   // for(int rank = 0; rank < 8; rank ++){
+   //    for (int file = 0; file < 6; file ++){
+   //       setBit(b, rank * 8 + file);
+   //    }
+   // }
+   // printBitboard(b);
 } 

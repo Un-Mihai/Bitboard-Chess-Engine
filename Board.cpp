@@ -14,3 +14,8 @@ void printBitboard(U64 bitboard) {
    std::cout << '\n' << "    a b c d e f g h" << "\n\n";
    std::cout << "Bitboard: " << bitboard << "\n\n";
 }
+
+void init_knight_attacks(){
+   for (int square = 0; square < 64; square ++)
+      knight_attacks[square] = generate_knight_attacks(square);
+}
