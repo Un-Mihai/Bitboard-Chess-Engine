@@ -32,3 +32,10 @@ void init_king_attacks(){
    for (int square = 0; square < 64; square ++)
       king_attacks[square] = generate_king_attacks(square);
 }
+
+//to be implemented
+void init_rook_attacks(){
+   for (int square = 0; square < 64; square ++){
+      continue;
+   }
+}
