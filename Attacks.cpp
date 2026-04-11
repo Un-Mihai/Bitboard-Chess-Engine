@@ -141,7 +141,7 @@ U64 generate_bishop_blocks(int square){
    return blocks;
 }
 
-U64 generate_bishop_attacks(int square, U64 blocks){\
+U64 generate_bishop_attacks(int square, U64 blocks){
    U64 attacks = 0ULL;
 
    //calculate bishop coordinates

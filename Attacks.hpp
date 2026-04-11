@@ -6,7 +6,7 @@
 #include "BitManipulation.hpp"
 
 //bit count arrays for occupancy masks
-const int bishop_occupancy_mask_count[64] = {
+inline const int bishop_occupancy_mask_count[64] = {
     6, 5, 5, 5, 5, 5, 5, 6,
     5, 5, 5, 5, 5, 5, 5, 5,
     5, 5, 7, 7, 7, 7, 5, 5, 
@@ -17,7 +17,7 @@ const int bishop_occupancy_mask_count[64] = {
     6, 5, 5, 5, 5, 5, 5, 6,
 };
 
-const int rook_occupancy_mask_count[64] = {
+inline const int rook_occupancy_mask_count[64] = {
     12, 11, 11, 11, 11, 11, 11, 12, 
     11, 10, 10, 10, 10, 10, 10, 11,
     11, 10, 10, 10, 10, 10, 10, 11,
@@ -29,9 +29,9 @@ const int rook_occupancy_mask_count[64] = {
 };
 
 //magic numbers
-U64 rook_magic_numbers[64];
+inline U64 rook_magic_numbers[64];
 
-U64 bishop_magic_numbers[64];
+inline U64 bishop_magic_numbers[64];
 
 /*------Leaper Pieces--------*/
 
