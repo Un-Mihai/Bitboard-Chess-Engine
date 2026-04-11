@@ -43,7 +43,7 @@ int main() {
    // for (int i = 0; i < 64; i ++)
    //    printBitboard(knight_attacks[i]);
 
-   uint64_t b = 0ULL;
+   // uint64_t b = 0ULL;
    // for(int rank = 0; rank < 8; rank ++){
    //    for (int file = 0; file < 6; file ++){
    //       setBit(b, rank * 8 + file);
@@ -65,5 +65,12 @@ int main() {
    //       generate_bishop_blocks(Squares::d4), 509
    //    )
    // );
+
+   // for (int square = 0; square < 64; square ++){
+   //    U64 occupancy = generate_rook_blocks(square);
+   //    std :: cout << bitCount (occupancy ) << ", ";
+   //    if (square % 8 == 7)
+   //       std :: cout << '\n';
+   // }
    
 } 
