@@ -28,6 +28,10 @@ const int rook_occupancy_mask_count[64] = {
     12, 11, 11, 11, 11, 11, 11, 12,
 };
 
+//magic numbers
+U64 rook_magic_numbers[64];
+
+U64 bishop_magic_numbers[64];
 
 /*------Leaper Pieces--------*/
 
