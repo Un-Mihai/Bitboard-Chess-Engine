@@ -9,7 +9,7 @@ namespace Pieces {
 }
 
 //unicode pieces
-char *unicode_pieces[12] = {
+inline const char* unicode_pieces[12] = {
     "♟", "♞", "♝", "♜", "♛", "♚",
     "♙", "♘", "♗", "♖", "♕", "♔"
 };

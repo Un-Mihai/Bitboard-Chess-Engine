@@ -89,7 +89,10 @@ int main() {
    //       std :: cout << '\n';
    // }
    
-   for (int i = 0; i < 12; i ++){
-      std :: cout << unicode_pieces[i] << ' ';
-   }
+   // for (int i = 0; i < 12; i ++){
+   //    std :: cout << unicode_pieces[i] << ' ';
+   // }
+
+   //printBitboard(pieces_bitboard[Pieces :: P]);
+   printBoard();
 } 
