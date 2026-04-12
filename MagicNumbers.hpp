@@ -4,7 +4,6 @@
 #include "Attacks.hpp"
 
 #include <string.h>
-#include <iostream>
 
 //seed for the pseudo-random number generator (can be any number)
 inline U32 random_state = 1804289383;

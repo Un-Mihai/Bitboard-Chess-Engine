@@ -44,10 +44,18 @@ int main() {
    init_pawn_attacks();
    init_knight_attacks();
    init_king_attacks();
+   init_bishop_attacks();
+   init_rook_attacks();
 
    U64 block = empty_bitboard;
    setBit(block, Squares::e6);
    printBitboard(generate_rook_attacks(Squares::e4, block));
+
+   for(int i = 0; i < 1; i ++){
+      for (int j = 0; j < 100; j ++){
+         printBitboard(bishop_attacks[i][j]);
+      }
+   }
 
    // printBitboard(white_pawns);
    // setBit(main_bitboard, Squares::e4);

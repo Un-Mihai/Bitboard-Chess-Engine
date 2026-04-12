@@ -88,7 +88,7 @@ void init_bishop_attacks(){
       for (int count = 0; count < number_of_occupancies; count ++){
          U64 occupancy = generate_one_occupancy(blocks, count);
          
-         int index = (occupancy * rook_magic_numbers[square]) >> (64 - bits_in_mask);
+         int index = (occupancy * bishop_magic_numbers[square]) >> (64 - bits_in_mask);
          //0 <= index <= 511 because of the magic number we have found
 
          //generate and store the attack bitboard at index position
