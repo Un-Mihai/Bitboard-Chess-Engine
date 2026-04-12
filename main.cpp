@@ -5,6 +5,7 @@
 #include "Attacks.hpp" //header in care tinem functiile de generare a atacurilor
 #include "Board.hpp" //header in care tinem bitboardurile si functiile generale (de ex avem print ul acum)
 #include "MagicNumbers.hpp"
+#include "Pieces.hpp"
 
 /*
    In Types.hpp am incapsulat enum urile in namespaceuri pentru ca sa nu fie ceva probleme mai incolo
@@ -23,11 +24,30 @@
    dar e doar o sugestie, oricum stie el cum e mai bine si face cum vrea
 */
 
+//--------Windows only-----------
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
+//make sure windows console can output fancy pieces
+void setup_console() {
+#ifdef _WIN32
+    // Set Windows console to use UTF-8
+    SetConsoleOutputCP(65001);
+#endif
+}
+//---------------------------------
+
 int main() {
-   
+   setup_console();
+
    init_pawn_attacks();
    init_knight_attacks();
    init_king_attacks();
+
+   U64 block = empty_bitboard;
+   setBit(block, Squares::e6);
+   printBitboard(generate_rook_attacks(Squares::e4, block));
 
    // printBitboard(white_pawns);
    // setBit(main_bitboard, Squares::e4);
@@ -40,7 +60,7 @@ int main() {
    // for (int i = 0; i < 64; i ++)
    //    printBitboard(knight_attacks[i]);
 
-   // uint64_t b = 0ULL;
+   // uint64_t b = empty_bitboard;
    // for(int rank = 0; rank < 8; rank ++){
    //    for (int file = 0; file < 6; file ++){
    //       setBit(b, rank * 8 + file);
@@ -70,4 +90,10 @@ int main() {
    //       std :: cout << '\n';
    // }
    
+   // for (int i = 0; i < 12; i ++){
+   //    std :: cout << unicode_pieces[i] << ' ';
+   // }
+
+   //printBitboard(pieces_bitboard[Pieces :: P]);
+   printBoard();
 } 
