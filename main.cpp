@@ -4,6 +4,7 @@
 #include "BitManipulation.hpp" //fisier in care tinem functiile de manipulare a bitilor
 #include "Attacks.hpp" //header in care tinem functiile de generare a atacurilor
 #include "Board.hpp" //header in care tinem bitboardurile si functiile generale (de ex avem print ul acum)
+#include "Pieces.hpp"
 
 /*
    In Types.hpp am incapsulat enum urile in namespaceuri pentru ca sa nu fie ceva probleme mai incolo
@@ -22,8 +23,23 @@
    dar e doar o sugestie, oricum stie el cum e mai bine si face cum vrea
 */
 
+//--------Windows only-----------
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
+//make sure windows console can output fancy pieces
+void setup_console() {
+#ifdef _WIN32
+    // Set Windows console to use UTF-8
+    SetConsoleOutputCP(65001);
+#endif
+}
+//---------------------------------
+
 int main() {
-   
+   setup_console();
+
    init_pawn_attacks();
    init_knight_attacks();
    init_king_attacks();
@@ -73,4 +89,7 @@ int main() {
    //       std :: cout << '\n';
    // }
    
+   for (int i = 0; i < 12; i ++){
+      std :: cout << unicode_pieces[i] << ' ';
+   }
 } 
