@@ -4,6 +4,7 @@
 #include "BitManipulation.hpp" //fisier in care tinem functiile de manipulare a bitilor
 #include "Attacks.hpp" //header in care tinem functiile de generare a atacurilor
 #include "Board.hpp" //header in care tinem bitboardurile si functiile generale (de ex avem print ul acum)
+#include "MagicNumbers.hpp"
 
 /*
    In Types.hpp am incapsulat enum urile in namespaceuri pentru ca sa nu fie ceva probleme mai incolo
@@ -27,10 +28,6 @@ int main() {
    init_pawn_attacks();
    init_knight_attacks();
    init_king_attacks();
-
-   U64 block = 0ULL;
-   setBit(block, Squares::e6);
-   printBitboard(generate_rook_attacks(Squares::e4, block));
 
    // printBitboard(white_pawns);
    // setBit(main_bitboard, Squares::e4);
@@ -60,12 +57,12 @@ int main() {
    // printBitboard(generate_bishop_attacks(Squares::d4, b));
    //printBitboard(generate_bishop_blocks(Squares::d1));
 
-   // printBitboard( 
-   //    generate_one_occupancy(
-   //       generate_bishop_blocks(Squares::d4), 509
-   //    )
-   // );
-
+   /*printBitboard( 
+      generate_one_occupancy(
+          generate_bishop_blocks(Squares::d4), 100
+       )
+    );
+   */
    // for (int square = 0; square < 64; square ++){
    //    U64 occupancy = generate_rook_blocks(square);
    //    std :: cout << bitCount (occupancy ) << ", ";

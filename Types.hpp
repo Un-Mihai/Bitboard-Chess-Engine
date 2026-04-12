@@ -3,6 +3,7 @@
 #include <cstdint>
 
 typedef uint64_t U64;
+typedef uint32_t U32;
 
 namespace Squares{
    enum {
@@ -22,6 +23,10 @@ namespace Pieces {
       P, N, B, R, Q, K, p, n, b, r, q, k
    };
 }
+
+enum{
+   rook, bishop
+};
 
 enum {
    white, black

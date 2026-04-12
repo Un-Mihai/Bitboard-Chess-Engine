@@ -61,3 +61,4 @@ void init_rook_attacks();
 
 //initialize the bishop attacks array
 void init_bishop_attacks();
+
