@@ -3,7 +3,7 @@
 #include "Attacks.hpp"
 #include "Types.hpp"
 
-inline U64 main_bitboard = 0ULL;
+inline U64 empty_bitboard = 0ULL;
 
 inline U64 black_pawns = 65280ULL;
 inline U64 white_pawns = 71776119061217280ULL;

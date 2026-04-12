@@ -28,7 +28,7 @@ int main() {
    init_knight_attacks();
    init_king_attacks();
 
-   U64 block = 0ULL;
+   U64 block = empty_bitboard;
    setBit(block, Squares::e6);
    printBitboard(generate_rook_attacks(Squares::e4, block));
 
@@ -43,7 +43,7 @@ int main() {
    // for (int i = 0; i < 64; i ++)
    //    printBitboard(knight_attacks[i]);
 
-   // uint64_t b = 0ULL;
+   // uint64_t b = empty_bitboard;
    // for(int rank = 0; rank < 8; rank ++){
    //    for (int file = 0; file < 6; file ++){
    //       setBit(b, rank * 8 + file);

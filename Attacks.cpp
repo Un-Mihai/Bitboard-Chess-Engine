@@ -5,9 +5,9 @@
 #include "Board.hpp"
 
 U64 generate_knight_attacks (int square){
-   U64 attacks = 0ULL;
+   U64 attacks = empty_bitboard;
 
-   U64 knight_position_bitboard = 0ULL;
+   U64 knight_position_bitboard = empty_bitboard;
    setBit(knight_position_bitboard, square);
 
    //---------- LEFT SIDE ATTACKS -----------
@@ -58,9 +58,9 @@ U64 generate_knight_attacks (int square){
 
 U64 generate_pawn_attacks(int square, int color){
    
-   U64 attacks = 0ULL;
+   U64 attacks = empty_bitboard;
 
-   U64 pawn_position_bitboard = 0ULL;
+   U64 pawn_position_bitboard = empty_bitboard;
    setBit(pawn_position_bitboard, square);
 
    //if the color is white the pawn shifts right else it shifts left
@@ -88,9 +88,9 @@ U64 generate_pawn_attacks(int square, int color){
 
 U64 generate_king_attacks(int square){
 
-   U64 attacks = 0ULL;
+   U64 attacks = empty_bitboard;
 
-   U64 king_position_bitboard = 0ULL;
+   U64 king_position_bitboard = empty_bitboard;
    setBit(king_position_bitboard, square);
 
    //generate the front/back moves, if the king is on the first/last rank it will overflow so it doesn't need checking
@@ -114,7 +114,7 @@ U64 generate_king_attacks(int square){
 }
 
 U64 generate_bishop_blocks(int square){
-   U64 blocks = 0ULL;
+   U64 blocks = empty_bitboard;
 
    //calculate bishop coordinates
    int bishop_rank = square / 8;
@@ -142,7 +142,7 @@ U64 generate_bishop_blocks(int square){
 }
 
 U64 generate_bishop_attacks(int square, U64 blocks){
-   U64 attacks = 0ULL;
+   U64 attacks = empty_bitboard;
 
    //calculate bishop coordinates
    int bishop_rank = square / 8;
@@ -181,7 +181,7 @@ U64 generate_bishop_attacks(int square, U64 blocks){
 }
 
 U64 generate_one_occupancy(U64 blocks, int index) {
-    U64 occupancy = 0ULL;
+    U64 occupancy = empty_bitboard;
 
     //loop over all the possible occupancies
     while (blocks) {
@@ -200,7 +200,7 @@ U64 generate_one_occupancy(U64 blocks, int index) {
 
 U64 generate_rook_blocks(int square){
 
-   U64 blocks = 0ULL;
+   U64 blocks = empty_bitboard;
 
    //get the rook's position
    int rook_rank = square / 8;
@@ -224,7 +224,7 @@ U64 generate_rook_blocks(int square){
 
 U64 generate_rook_attacks(int square, U64 blocks){
 
-   U64 attacks = 0ULL;
+   U64 attacks = empty_bitboard;
 
    //get the rook's position
    int rook_rank = square / 8;
