@@ -2,7 +2,7 @@
 
 #include <cstdint>
 
-#include "Types.hpp"
+#include "core/Types.hpp"
 
 inline const bool getBit(U64 bitboard, int square){
    return (bitboard & (1ULL << square));

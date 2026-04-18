@@ -1,7 +1,9 @@
 Aici putem scrie task-uri si le marcam cu ok/done pe cele terminate
 
--create random sparse 64-bit number generator (must work on both linux and windows)
--generate magic numbers (1 array of 64 numbers per piece - rook and biskop) by brute-force trial and error
+-create random sparse 64-bit number generator (must work on both linux and windows)                                         -done
+-generate magic numbers (1 array of 64 numbers per piece - rook and biskop) by brute-force trial and error                  -done
     Obs: array-urile exista deja neinitializate in attacks.hpp
 -create precalculated arrays storing bitcounts for each occupancy bitboard on every position (rook and bishop)              -done
 -implement init_rook_attacks and init_bishop_attacks with magic numbers                                                     -done
+
+-parsing FEN strings

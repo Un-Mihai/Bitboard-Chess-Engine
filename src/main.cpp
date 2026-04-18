@@ -1,0 +1,80 @@
+#include<iostream>
+
+#include "core/Types.hpp" //fisier in care definesc enum-urile si tipulde date U64 (e mai scurt) 
+#include "utils/BitManipulation.hpp" //fisier in care tinem functiile de manipulare a bitilor
+#include "movegen/Attacks.hpp" //header in care tinem functiile de generare a atacurilor si variabilele aferente
+#include "core/Board.hpp" //header in care tinem bitboardurile principale si functiile generale (de ex avem print ul acum)
+#include "movegen/MagicNumbers.hpp" //header in care generam magic numbers
+#include "core/Pieces.hpp" //in asta tinem bitboardurile cu pisese, si sirul cu unicodes pentru afisare
+#include "core/Init.hpp" //fisier care initializeaza ce avem nevoie
+
+//--------Windows only-----------
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
+//make sure windows console can output fancy pieces
+void setup_console() {
+#ifdef _WIN32
+    // Set Windows console to use UTF-8
+    SetConsoleOutputCP(65001);
+#endif
+}
+//---------------------------------
+
+int main() {
+   setup_console();
+
+   parse_fen_string(fen_tricky_position_board);
+
+   printBoard();
+   printBitboard(occupancies_bitboards[black]);
+
+   // printBitboard(white_pawns);
+   // setBit(main_bitboard, Squares::e4);
+   // printBitboard(main_bitboard);
+   // functieExemplu();
+
+
+   //----- TEMPORARY CODE(might be reused) ----------
+
+   // for (int i = 0; i < 64; i ++)
+   //    printBitboard(knight_attacks[i]);
+
+   // uint64_t b = empty_bitboard;
+   // for(int rank = 0; rank < 8; rank ++){
+   //    for (int file = 0; file < 6; file ++){
+   //       setBit(b, rank * 8 + file);
+   //    }
+   // }
+   // printBitboard(b);
+   
+   // std :: cout << first_lsb(b);
+
+   // setBit(b, Squares::c3);
+   // setBit(b, Squares::b6);
+   // setBit(b, Squares::g7);
+
+   // printBitboard(generate_bishop_attacks(Squares::d4, b));
+   //printBitboard(generate_bishop_blocks(Squares::d1));
+
+   /*printBitboard( 
+      generate_one_occupancy(
+          generate_bishop_blocks(Squares::d4), 100
+       )
+    );
+   */
+   // for (int square = 0; square < 64; square ++){
+   //    U64 occupancy = generate_rook_blocks(square);
+   //    std :: cout << bitCount (occupancy ) << ", ";
+   //    if (square % 8 == 7)
+   //       std :: cout << '\n';
+   // }
+   
+   // for (int i = 0; i < 12; i ++){
+   //    std :: cout << unicode_pieces[i] << ' ';
+   // }
+
+   //printBitboard(pieces_bitboard[Pieces :: P]);
+   //printBoard();
+} 

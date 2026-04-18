@@ -1,8 +1,9 @@
 #include <iostream>
-#include "Attacks.hpp"
-#include "Types.hpp"
-#include "BitManipulation.hpp"
-#include "Board.hpp"
+
+#include "movegen/Attacks.hpp"
+#include "core/Types.hpp"
+#include "utils/BitManipulation.hpp"
+#include "core/Board.hpp"
 
 U64 generate_knight_attacks (int square){
    U64 attacks = empty_bitboard;
@@ -261,5 +262,7 @@ U64 generate_rook_attacks(int square, U64 blocks){
    return attacks;
    
 }
+
+
 
 //fisierul incepe sa fie mai voluminos decat credeam... imi zici daca crezi ca e nevoie de o restructurare la fisiere

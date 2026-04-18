@@ -1,15 +1,8 @@
-#pragma once
+#include<iostream>
 
-#include "Types.hpp"
-#include "Attacks.hpp"
+#include "movegen/MagicNumbers.hpp"
 
-#include <string.h>
-
-//seed for the pseudo-random number generator (can be any number)
-inline U32 random_state = 1804289383;
-
-//XORSHIFT32 generator, returns random 32-bit numbers
-inline U32 get_random_U32_number() {
+U32 get_random_U32_number() {
     random_state ^= random_state << 13;
     random_state ^= random_state >> 17;
     random_state ^= random_state << 5;
@@ -17,8 +10,7 @@ inline U32 get_random_U32_number() {
     return random_state;
 }
 
-//returns a 64-bit number by concatenating four 16-bit numbers
-inline U64 get_random_U64_number() {
+U64 get_random_U64_number() {
     U64 n1, n2, n3, n4; 
 
     //extract only the last 16 bits from each random number
@@ -31,15 +23,12 @@ inline U64 get_random_U64_number() {
     return n1 | (n2 << 16) | (n3 << 32) | (n4 << 48);
 }
 
-// generates a magic number candidate 
-inline U64 get_magic_number_candidate() {
+U64 get_magic_number_candidate() {
     //biwise & 3 numbers to get a number with very few bits set to 1 (sparse number).
     return get_random_U64_number() & get_random_U64_number() & get_random_U64_number();
 }
 
-// brute-force search for a valid magic number for a piece on a given square
-// piece: 0 for Rook, 1 for Bishop.
-inline U64 find_magic_number(int square, int piece) {
+U64 find_magic_number(int square, int piece) {
     
     //the number of relevant bits for the current square and piece
     int bit_count = piece ? bishop_occupancy_mask_count[square] : rook_occupancy_mask_count[square];
@@ -100,15 +89,4 @@ inline U64 find_magic_number(int square, int piece) {
     
     std::cout << "fail\n";
     return 0;
-}
-
-//function used to initilaize the arrays for the magic numbers (the values can be hardcoded)
-inline void init_magic_numbers() {
-    for(int square = 0; square < 64; square++) {
-        rook_magic_numbers[square] = find_magic_number(square, rook);
-    }
-
-    for(int square = 0; square < 64; square++) {
-        bishop_magic_numbers[square] = find_magic_number(square, bishop);
-    }
 }

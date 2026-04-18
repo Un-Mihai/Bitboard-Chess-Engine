@@ -1,42 +1,8 @@
-#include <iostream>
+#include "core/Init.hpp"
+#include "core/Board.hpp"
+#include "movegen/Attacks.hpp"
+#include "movegen/MagicNumbers.hpp"
 
-#include "Board.hpp"
-#include "BitManipulation.hpp"
-
-void printBitboard(U64 bitboard) {
-   for (int rank = 0; rank < 8; rank++) {
-      std::cout << ' ' << 8 - rank << "  ";
-      for (int file = 0; file < 8; file++) {
-         std::cout << getBit(bitboard, rank * 8 + file) << ' ';
-      }
-      std::cout << '\n';
-   }
-   std::cout << '\n' << "    a b c d e f g h" << "\n\n";
-   std::cout << "Bitboard: " << bitboard << "\n\n";
-}
-
-void printBoard(){
-   for (int rank = 0; rank < 8; rank++){
-      std::cout << ' ' << 8 - rank << "  ";
-      for (int file = 0; file < 8; file++){
-         
-         int square = rank * 8 + file;
-         bool piece_on_square = false;
-
-         for (int piece = 0; piece < 12; piece ++){
-            if ( getBit(pieces_bitboard[piece], square) ){
-               std :: cout << unicode_pieces[piece] << ' ';
-               piece_on_square = true;
-               break;
-            }
-         }
-         if (!piece_on_square)
-            std :: cout << '.' << ' ';
-      }
-      std::cout << '\n';
-   }
-   std::cout << '\n' << "    a b c d e f g h" << "\n\n";
-}
 
 void init_pawn_attacks(){
    for (int square = 0; square < 64; square ++){
@@ -47,13 +13,15 @@ void init_pawn_attacks(){
 }
 
 void init_knight_attacks(){
-   for (int square = 0; square < 64; square ++)
-      knight_attacks[square] = generate_knight_attacks(square);
+   for (int square = 0; square < 64; square ++){
+        knight_attacks[square] = generate_knight_attacks(square);
+   }
 }
 
 void init_king_attacks(){
-   for (int square = 0; square < 64; square ++)
-      king_attacks[square] = generate_king_attacks(square);
+   for (int square = 0; square < 64; square ++){
+        king_attacks[square] = generate_king_attacks(square);
+   }
 }
 
 void init_rook_attacks(){
@@ -96,4 +64,14 @@ void init_bishop_attacks(){
          bishop_attacks[square][index] = attacks;
       }
    }
+}
+
+void init_magic_numbers() {
+    for(int square = 0; square < 64; square++) {
+        rook_magic_numbers[square] = find_magic_number(square, rook);
+    }
+
+    for(int square = 0; square < 64; square++) {
+        bishop_magic_numbers[square] = find_magic_number(square, bishop);
+    }
 }
