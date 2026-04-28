@@ -126,12 +126,14 @@ void parse_fen_string(const char* fen){
    for(int piece = Pieces::P; piece <= Pieces::K; piece ++){
       //populate white occupancy bitboard;
       occupancies_bitboards[white] |= pieces_bitboards[piece];
+      occupancies_bitboards[both] |= pieces_bitboards[piece];
    }
 
    //init black occupancies
    for(int piece = Pieces::p; piece <= Pieces::k; piece ++){
       //populate black occupancy bitboard;
       occupancies_bitboards[black] |= pieces_bitboards[piece];
+      occupancies_bitboards[both] |= pieces_bitboards[piece];
    }
 }
 

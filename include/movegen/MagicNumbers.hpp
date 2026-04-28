@@ -3,7 +3,6 @@
 #include <string.h>
 
 #include "core/Types.hpp"
-#include "Attacks.hpp"
 
 
 //seed for the pseudo-random number generator (can be any number)

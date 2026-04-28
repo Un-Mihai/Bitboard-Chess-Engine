@@ -4,8 +4,9 @@
 
 #include "core/Types.hpp"
 #include "utils/BitManipulation.hpp"
+#include "MagicNumbers.hpp"
 
-/*---------PIECES ATTACS FOR ALL SQUARES---------*/
+/*---------PIECES ATTACKS FOR ALL SQUARES---------*/
 
 inline U64 knight_attacks[64];
 inline U64 pawn_attacks[2][64];
@@ -16,6 +17,10 @@ inline U64 rook_attacks[64][4096];
 //there are maximum 2^9 = 512 different attacks for a bishop
 inline U64 bishop_attacks[64][512];
 
+/*-------- BLOCKS FOR ROOK AND BISHOP -------------*/
+
+inline U64 rook_blocks[64];
+inline U64 bishop_blocks[64];
 
 /*----------OCCUPANCIES MASKS-----------*/
 
@@ -78,5 +83,24 @@ inline U64 generate_queen_attacks(int square, U64 blocks){
 //generate the index-th bitboard among all the possible blocker configurations
 U64 generate_one_occupancy(U64 blocks, int index);
 
+/*--------- GET ATTACKS FOR ROOK AND BISHOP -----------*/
 
+// returns attacks bitboard from the precalculated rook_attacks array
+inline U64 get_rook_attacks(int square, U64 blocks){
+    int index = ((blocks & rook_blocks[square]) * rook_magic_numbers[square]) >> (64 - rook_occupancy_mask_count[square]);
+    return rook_attacks[square][index];
+};
 
+// returns attacks bitboard from the precalculated bishop_attacks array
+inline U64 get_bishop_attacks(int square, U64 blocks){
+    int index = ((blocks & bishop_blocks[square]) * bishop_magic_numbers[square]) >> (64 - bishop_occupancy_mask_count[square]);
+    return bishop_attacks[square][index];
+};
+
+/*------------------------------------------------*/
+
+//checks whether a square is attacked by the side to move
+bool is_square_attacked(int square, int side_to_move);
+
+//creates a bitboard marking the attacked squares
+U64 attacked_squares(int side_to_move);

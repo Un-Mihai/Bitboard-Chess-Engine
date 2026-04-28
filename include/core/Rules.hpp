@@ -3,10 +3,10 @@
 #include "Types.hpp"
 
 //side to move
-int side;
+inline int side;
 
 // the one and only square that can capture enpassant in current position
-int enpassant = Squares :: no_square;
+inline int enpassant = Squares :: no_square;
 
 /*----------- castling rights ----------------
 
@@ -18,7 +18,7 @@ int enpassant = Squares :: no_square;
 ex: 1010 means both kings can castle queen side only
 
 --------------------------------------------*/
-int castle;
+inline int castle;
 
 enum{
     wk = 1,

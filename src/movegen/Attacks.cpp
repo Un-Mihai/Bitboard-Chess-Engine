@@ -262,3 +262,54 @@ U64 generate_rook_attacks(int square, U64 blocks){
    return attacks;
    
 }
+
+bool is_square_attacked(int square, int side_to_move){
+   // if a pawn of opposite color, hypothetically placed on the square, would attack an existing pawn 
+   // then the square is attacked by that existing pawn
+   if (pawn_attacks[1-side_to_move][square] & pieces_bitboards[(side_to_move == white) ? Pieces::P : Pieces::p])
+      return 1;
+
+   //same for the other pieces
+
+   if (knight_attacks[square] & pieces_bitboards[(side_to_move == white) ? Pieces::N : Pieces::n])
+      return 1;
+
+   if (king_attacks[square] & pieces_bitboards[(side_to_move == white) ? Pieces::K : Pieces::k])
+      return 1;
+
+   // for the sliding pieces we must find the attacks for the specific current position
+   U64 occupancies = occupancies_bitboards[both];
+
+   // check horizontal queen attack or rook attack
+   if (get_rook_attacks(square, occupancies) & (pieces_bitboards[(side_to_move == white) ? Pieces::R : Pieces::r] |
+                                                pieces_bitboards[(side_to_move == white) ? Pieces::Q : Pieces::q] ))
+      return 1;
+
+   // check diagonal queen attack or bishop attack
+   if (get_bishop_attacks(square, occupancies) & (pieces_bitboards[(side_to_move == white) ? Pieces::B : Pieces::b] |
+                                                pieces_bitboards[(side_to_move == white) ? Pieces::Q : Pieces::q] ))
+      return 1;
+
+   // else, the square is not attacked
+   return 0;
+}
+
+U64 attacked_squares(int side_to_move){
+   // starting with no attacks
+   U64 attacks = empty_bitboard;
+
+   // current square
+   int square = Squares::no_square;
+
+   // loop over entire board
+   for (int rank = 0; rank < 8; rank ++){
+      for ( int file = 0; file < 8; file ++ ){
+         square = rank * 8 + file;
+
+         //if the square is attacked we mark it
+         if ( is_square_attacked(square, side_to_move) )
+            setBit(attacks, square);
+      }
+   }
+   return attacks;
+}

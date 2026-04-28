@@ -66,6 +66,13 @@ void init_bishop_attacks(){
    }
 }
 
+void init_blocks(){
+   for (int square = 0; square < 64; square ++){
+      rook_blocks[square] = generate_rook_blocks(square);
+      bishop_blocks[square] = generate_bishop_blocks(square);
+   }
+}
+
 void init_magic_numbers() {
     for(int square = 0; square < 64; square++) {
         rook_magic_numbers[square] = find_magic_number(square, rook);
@@ -74,4 +81,20 @@ void init_magic_numbers() {
     for(int square = 0; square < 64; square++) {
         bishop_magic_numbers[square] = find_magic_number(square, bishop);
     }
+}
+
+void init_all(){
+   init_magic_numbers();
+
+   init_pawn_attacks();
+
+   init_knight_attacks();
+
+   init_king_attacks();
+
+   init_rook_attacks();
+
+   init_bishop_attacks();
+
+   init_blocks();
 }

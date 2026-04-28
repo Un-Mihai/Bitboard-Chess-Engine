@@ -16,5 +16,10 @@ void init_rook_attacks();
 //initialize the bishop attacks array
 void init_bishop_attacks();
 
+//initialize blocks for rook and bishop
+void init_blocks();
+
 //function used to initilaize the arrays for the magic numbers (the values can be hardcoded)
 void init_magic_numbers();
+
+void init_all();

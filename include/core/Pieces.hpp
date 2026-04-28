@@ -32,6 +32,7 @@ inline int parse_piece_char_to_int(char c) {
 
 /*-----------BITBOARDS FOR ALL KINDS OF PIECES----------*/
 
+//starting positions
 inline U64 black_pawns = 65280ULL;
 inline U64 white_pawns = 71776119061217280ULL;
 

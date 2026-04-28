@@ -1,6 +1,7 @@
 #include<iostream>
 
 #include "movegen/MagicNumbers.hpp"
+#include "movegen/Attacks.hpp"
 
 U32 get_random_U32_number() {
     random_state ^= random_state << 13;

@@ -25,10 +25,14 @@ void setup_console() {
 int main() {
    setup_console();
 
-   parse_fen_string(fen_cmk_position_board);
+   init_all();
+
+   parse_fen_string(fen_tricky_position_board);
 
    printBoard();
-   printBitboard(occupancies_bitboards[black]);
+
+   printBitboard(attacked_squares(white));
+   //printBitboard(occupancies_bitboards[black]);
 
    // printBitboard(white_pawns);
    // setBit(main_bitboard, Squares::e4);
@@ -51,9 +55,9 @@ int main() {
    
    // std :: cout << first_lsb(b);
 
-    setBit(b, Squares::e4);
-    setBit(b, Squares::b6);
-    setBit(b, Squares::d6);
+   //  setBit(b, Squares::e5);
+   //  setBit(b, Squares::b6);
+   //  setBit(b, Squares::d6);
 
    // printBitboard(generate_bishop_attacks(Squares::d4, b));
    //printBitboard(generate_bishop_blocks(Squares::d1));
@@ -78,6 +82,6 @@ int main() {
    //printBitboard(pieces_bitboard[Pieces :: P]);
    //printBoard();
 
-   U64 queen_attacks = generate_queen_attacks(Squares::d4, b);
-   printBitboard(queen_attacks);
+   // U64 rook_attacks = get_rook_attacks(Squares::d4, b);
+   // printBitboard(rook_attacks);
 } 
