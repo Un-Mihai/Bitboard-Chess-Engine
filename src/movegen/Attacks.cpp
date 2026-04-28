@@ -199,7 +199,7 @@ U64 generate_one_occupancy(U64 blocks, int index) {
     return occupancy;
 }
 
-U64 generate_rook_blocks(int square){
+U64   generate_rook_blocks(int square){
 
    U64 blocks = empty_bitboard;
 
@@ -262,7 +262,3 @@ U64 generate_rook_attacks(int square, U64 blocks){
    return attacks;
    
 }
-
-
-
-//fisierul incepe sa fie mai voluminos decat credeam... imi zici daca crezi ca e nevoie de o restructurare la fisiere

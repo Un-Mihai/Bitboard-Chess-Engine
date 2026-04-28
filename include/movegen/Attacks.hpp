@@ -69,6 +69,12 @@ U64 generate_bishop_attacks(int square, U64 blocks);
 //mark the bits a rook can go to based on a given bitboard with blocks
 U64 generate_rook_attacks(int square, U64 blocks);
 
+//mark the bits a queen can go to based on a given bitboard with blocks
+inline U64 generate_queen_attacks(int square, U64 blocks){
+    //queen = rook + bishop
+    return generate_bishop_attacks(square, blocks) | generate_rook_attacks(square, blocks);
+};
+
 //generate the index-th bitboard among all the possible blocker configurations
 U64 generate_one_occupancy(U64 blocks, int index);
 

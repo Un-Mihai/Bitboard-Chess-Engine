@@ -7,3 +7,4 @@ Aici putem scrie task-uri si le marcam cu ok/done pe cele terminate
 -implement init_rook_attacks and init_bishop_attacks with magic numbers                                                     -done
 
 -parsing FEN strings
+-generate queen attacks

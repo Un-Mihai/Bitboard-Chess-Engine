@@ -25,7 +25,7 @@ void setup_console() {
 int main() {
    setup_console();
 
-   parse_fen_string(fen_tricky_position_board);
+   parse_fen_string(fen_cmk_position_board);
 
    printBoard();
    printBitboard(occupancies_bitboards[black]);
@@ -41,7 +41,7 @@ int main() {
    // for (int i = 0; i < 64; i ++)
    //    printBitboard(knight_attacks[i]);
 
-   // uint64_t b = empty_bitboard;
+    uint64_t b = empty_bitboard;
    // for(int rank = 0; rank < 8; rank ++){
    //    for (int file = 0; file < 6; file ++){
    //       setBit(b, rank * 8 + file);
@@ -51,9 +51,9 @@ int main() {
    
    // std :: cout << first_lsb(b);
 
-   // setBit(b, Squares::c3);
-   // setBit(b, Squares::b6);
-   // setBit(b, Squares::g7);
+    setBit(b, Squares::e4);
+    setBit(b, Squares::b6);
+    setBit(b, Squares::d6);
 
    // printBitboard(generate_bishop_attacks(Squares::d4, b));
    //printBitboard(generate_bishop_blocks(Squares::d1));
@@ -77,4 +77,7 @@ int main() {
 
    //printBitboard(pieces_bitboard[Pieces :: P]);
    //printBoard();
+
+   U64 queen_attacks = generate_queen_attacks(Squares::d4, b);
+   printBitboard(queen_attacks);
 } 
