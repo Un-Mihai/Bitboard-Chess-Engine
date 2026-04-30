@@ -1,4 +1,5 @@
 #include<iostream>
+#include<bitset>
 
 #include "core/Types.hpp" //fisier in care definesc enum-urile si tipulde date U64 (e mai scurt) 
 #include "utils/BitManipulation.hpp" //fisier in care tinem functiile de manipulare a bitilor
@@ -7,6 +8,7 @@
 #include "movegen/MagicNumbers.hpp" //header in care generam magic numbers
 #include "core/Pieces.hpp" //in asta tinem bitboardurile cu pisese, si sirul cu unicodes pentru afisare
 #include "core/Init.hpp" //fisier care initializeaza ce avem nevoie
+#include "movegen/MoveGen.hpp"
 
 //--------Windows only-----------
 #ifdef _WIN32
@@ -31,7 +33,7 @@ int main() {
 
    printBoard();
 
-   printBitboard(attacked_squares(white));
+   //printBitboard(attacked_squares(white));
    //printBitboard(occupancies_bitboards[black]);
 
    // printBitboard(white_pawns);
@@ -84,4 +86,7 @@ int main() {
 
    // U64 rook_attacks = get_rook_attacks(Squares::d4, b);
    // printBitboard(rook_attacks);
+
+   U32 move = encode_move(Squares::h1, Squares::h1, 0b0100, 0b1000000000000001);
+   std::cout << std::bitset<32>(move) << '\n' << is_move_capture(move) << ' ' << is_move_promotion(move);
 } 

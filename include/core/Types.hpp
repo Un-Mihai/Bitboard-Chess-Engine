@@ -32,3 +32,13 @@ enum{
 enum {
    white, black, both
 };
+
+struct MoveList{
+   U32 moves[256];      //there are maximum 218 possible moves but we choose 256 (2^8) to allow better low level optimisations
+   int count = 0;
+
+   //helper function to add a move to the list
+   inline void add_move(U32 move){
+      moves[count++] = move;
+   }
+};

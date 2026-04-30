@@ -32,6 +32,11 @@ Variabile care sa retina pentru fiecare pozitie de pe tabla numarul de campuri c
 Determinare bitboard cu pozitiile atacate de catre inamic -- pentru determinarea sah-ului 
 -imbinarea cu OR (|) a posibilelor mutari ale inamicului
 
+Codificarea unei mutari se va face initial intr-un numar pe 32 biti care va retine informatii despre mutare.
+Structura unei mutari este specificata in fisierul MoveGen.hpp, unde avem si niste functii ajutatoare care extrag informatii despre mutare
+
+https://www.chessprogramming.org/Encoding_Moves (sectiunile 1 si 2) pentru mai multe detalii
+
 
 
 -----------Implementarea jocului in sine doar cu input de la utilizator (prima oara in consola propun)-----------
