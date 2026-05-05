@@ -73,6 +73,9 @@ Main Loop
 Joc Multiplayer in LAN folosind socket-uri
 Nivele de inteligenta pentru bot
 
+Optimizari:
+Implementare generate_pawn_pushes cu template pentru a nu duplica codul pentru fiecare side (white/black) + am scapa de un if ceea ce imbunateste performanta
+
 
 ------------ Flaguri la compilare -------------------
 Am adaugat 3 flaguri:

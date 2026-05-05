@@ -24,6 +24,12 @@ inline const U64 empty_ab_file = 18229723555195321596ULL;
 inline const U64 empty_h_file = 9187201950435737471ULL;
 inline const U64 empty_gh_file = 4557430888798830399ULL;
 
+//Bitboards having 1 on specific ranks and 0 in rest
+inline const U64 RANK_2 = 71776119061217280ULL;
+inline const U64 RANK_3 = 280375465082880ULL;
+inline const U64 RANK_6 = 16711680ULL;
+inline const U64 RANK_7 = 65280ULL;
+
 //pieces bitboards
 inline U64 pieces_bitboards[12] = {
     white_pawns, white_knights, white_bishops, white_rooks, white_queen, white_king,

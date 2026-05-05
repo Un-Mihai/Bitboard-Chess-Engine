@@ -88,5 +88,14 @@ int main() {
    // printBitboard(rook_attacks);
 
    U32 move = encode_move(Squares::h1, Squares::h1, 0b0100, 0b1000000000000001);
-   std::cout << std::bitset<32>(move) << '\n' << is_move_capture(move) << ' ' << is_move_promotion(move);
+   std::cout << std::bitset<32>(move) << '\n' << is_move_capture(move) << ' ' << is_move_promotion(move) << '\n';
+
+   MoveList move_list;
+   generate_moves(black, move_list);
+
+   for (int i = 0; i < move_list.count; i ++){
+      U32 move = move_list.moves[i];
+      std :: cout << "Mutarea " << i << ": " << square_to_coordinates[get_move_source_square(move)] << " to "
+                                             << square_to_coordinates[get_move_target_square(move)] << '\n';
+   }
 } 
