@@ -2,8 +2,10 @@
 #include "core/Types.hpp"
 #include "core/Board.hpp"
 #include "core/Logger.hpp"
+#include "core/Rules.hpp"
 
 void generate_moves(int side, MoveList& move_list){
+    generate_pawn_captures(side, move_list);
     generate_pawn_pushes(side, move_list);
     
 }
@@ -91,6 +93,73 @@ void generate_pawn_pushes(int side, MoveList& move_list){
         while (double_push_targets) {
             target_square = pop_lsb(double_push_targets);
             move_list.add_move(encode_move(target_square - 16, target_square, 1));
+        }
+    }
+}
+
+void generate_pawn_captures(int side, MoveList& move_list){
+    int source_square, target_square;
+
+    // promoting pawns are pawns on rank 7 for white and 2 for black
+    U64 promoting_pawns, normal_pawns;
+
+    if (side == white){
+        U64 white_pawns = pieces_bitboards[Pieces::P];
+        promoting_pawns = white_pawns & RANK_7;
+        normal_pawns = white_pawns & ~RANK_7;
+
+        if (enpassant != Squares::no_square){
+            U64 enpassant_attackers = pawn_attacks[black][enpassant] & white_pawns;
+            while(enpassant_attackers){
+                source_square = pop_lsb(enpassant_attackers);
+                U32 move = encode_move(source_square, enpassant, 5);
+                move_list.add_move(move);
+            }
+        }
+    }
+    else{
+        U64 black_pawns = pieces_bitboards[Pieces::p];
+        promoting_pawns = black_pawns & RANK_2;
+        normal_pawns = black_pawns & ~RANK_2;
+
+        if (enpassant != Squares::no_square){
+            U64 enpassant_attackers = pawn_attacks[white][enpassant] & black_pawns;
+            while(enpassant_attackers){
+                source_square = pop_lsb(enpassant_attackers);
+                U32 move = encode_move(source_square, enpassant, 5);
+                move_list.add_move(move);
+            }
+        }
+    }
+
+    U64 pawn_captures;
+    U64 enemy_pieces = occupancies_bitboards[1-side];
+
+    // loop over the pawns that might promote
+    while(promoting_pawns){
+        source_square = pop_lsb(promoting_pawns);
+        // calculate the occupied target squares
+        pawn_captures = pawn_attacks[side][source_square] & enemy_pieces;
+
+        while (pawn_captures){
+            target_square = pop_lsb(pawn_captures);
+            move_list.add_move(encode_move(source_square, target_square, 15)); // queen promotion capture
+            move_list.add_move(encode_move(source_square, target_square, 14)); // rook promotion capture
+            move_list.add_move(encode_move(source_square, target_square, 13)); // bishop pomotion capture
+            move_list.add_move(encode_move(source_square, target_square, 12)); // knight promotion capture
+        }
+    }
+
+    // loop over the rest of the pawns
+    while (normal_pawns){
+        source_square = pop_lsb(normal_pawns);
+        // calculate the occupied target squares
+        pawn_captures = pawn_attacks[side][source_square] & enemy_pieces;
+
+        while (pawn_captures){
+            target_square = pop_lsb(pawn_captures);
+            U32 move = encode_move(source_square, target_square, 4);
+            move_list.add_move(move);
         }
     }
 }

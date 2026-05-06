@@ -91,7 +91,7 @@ int main() {
    std::cout << std::bitset<32>(move) << '\n' << is_move_capture(move) << ' ' << is_move_promotion(move) << '\n';
 
    MoveList move_list;
-   generate_moves(black, move_list);
+   generate_moves(white, move_list);
 
    for (int i = 0; i < move_list.count; i ++){
       U32 move = move_list.moves[i];
