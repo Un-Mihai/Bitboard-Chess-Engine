@@ -90,7 +90,15 @@ inline bool is_move_queen_castle(U32 move){
 
 void generate_moves(int side, MoveList& move_list);
 
-//adds to the move list pawn pushes (promotions included)
-void generate_pawn_pushes(int side, MoveList& move_list);
+template <int SIDE>
+void generate_all_moves(MoveList& move_list);
 
-void generate_pawn_captures(int side, MoveList& move_list);
+//adds to the move list pawn pushes (promotions included)
+template <int SIDE>
+void generate_pawn_pushes(MoveList& move_list);
+
+template <int SIDE>
+void generate_pawn_captures(MoveList& move_list);
+
+template <int SIDE>
+void generate_king_moves(MoveList& move_list);

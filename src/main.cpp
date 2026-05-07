@@ -29,10 +29,6 @@ int main() {
 
    init_all();
 
-   parse_fen_string(fen_tricky_position_board);
-
-   printBoard();
-
    //printBitboard(attacked_squares(white));
    //printBitboard(occupancies_bitboards[black]);
 
@@ -87,10 +83,15 @@ int main() {
    // U64 rook_attacks = get_rook_attacks(Squares::d4, b);
    // printBitboard(rook_attacks);
 
+
    U32 move = encode_move(Squares::h1, Squares::h1, 0b0100, 0b1000000000000001);
    std::cout << std::bitset<32>(move) << '\n' << is_move_capture(move) << ' ' << is_move_promotion(move) << '\n';
 
+   parse_fen_string(fen_move_generation_testing);
+   printBoard();
+
    MoveList move_list;
+   //48 moves should be generated in this position
    generate_moves(white, move_list);
 
    for (int i = 0; i < move_list.count; i ++){
