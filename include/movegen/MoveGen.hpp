@@ -105,3 +105,7 @@ void generate_king_moves(MoveList& move_list);
 
 template <int SIDE>
 void generate_knight_moves(MoveList& move_list);
+
+//generates the moves for bishop, rook or queen
+template <int SIDE, int PIECE_TYPE>
+void generate_slider_piece_moves(MoveList& move_list);

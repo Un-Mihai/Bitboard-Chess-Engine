@@ -17,6 +17,9 @@ void generate_all_moves(MoveList& move_list){
     generate_pawn_pushes<SIDE>(move_list);
     generate_king_moves<SIDE>(move_list);
     generate_knight_moves<SIDE>(move_list);
+    generate_slider_piece_moves<SIDE,Pieces::B>(move_list);
+    generate_slider_piece_moves<SIDE,Pieces::R>(move_list);
+    generate_slider_piece_moves<SIDE,Pieces::Q>(move_list);
 }
 
 template <int SIDE>
@@ -228,5 +231,48 @@ void generate_knight_moves(MoveList& move_list){
             move_list.add_move(encode_move(source_square, target_square, 0));
         }
     }
-    
+}
+
+template <int SIDE, int PIECE_TYPE>
+void generate_slider_piece_moves(MoveList& move_list){
+    int source_square, target_square;
+    U64 attacks, captures, quiet_targets;
+
+    const U64 both_occ = occupancies_bitboards[both];
+    const U64 friendly_occ = occupancies_bitboards[SIDE];
+    const U64 enemy_occ = occupancies_bitboards[SIDE ^ 1];
+
+    U64 pieces = pieces_bitboards[PIECE_TYPE];
+
+    while (pieces) {
+        source_square = pop_lsb(pieces);
+
+        // get the coresponding attacks based on the piece 
+        if constexpr (PIECE_TYPE == Pieces::B || PIECE_TYPE == Pieces::b) {
+            attacks = get_bishop_attacks(source_square, both_occ);
+        }
+        else if constexpr (PIECE_TYPE == Pieces::R || PIECE_TYPE == Pieces::r) {
+            attacks = get_rook_attacks(source_square, both_occ);
+        }
+        else { // Queen
+            attacks = generate_queen_attacks(source_square, both_occ);
+        }
+
+        // a piece can't attack same side
+        attacks &= ~friendly_occ;
+
+        // ----------------- CAPTURES ------------------
+        captures = attacks & enemy_occ;
+        while (captures) {
+            target_square = pop_lsb(captures);
+            move_list.add_move(encode_move(source_square, target_square, 4));
+        }
+
+        // ----------------- QUIET MOVES ------------------
+        quiet_targets = attacks & ~both_occ;
+        while (quiet_targets) {
+            target_square = pop_lsb(quiet_targets);
+            move_list.add_move(encode_move(source_square, target_square, 0));
+        }
+    }
 }

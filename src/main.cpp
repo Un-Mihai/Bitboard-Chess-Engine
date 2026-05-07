@@ -91,7 +91,6 @@ int main() {
    printBoard();
 
    MoveList move_list;
-   //48 moves should be generated in this position
    generate_moves(white, move_list);
 
    for (int i = 0; i < move_list.count; i ++){

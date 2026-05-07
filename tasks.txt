@@ -10,5 +10,7 @@ Aici putem scrie task-uri si le marcam cu ok/done pe cele terminate
 -generate queen attacks                                                                                                     -done
 -initialize rook and bishop blocks and create function to get attacks from arrays based on blocks                           -done
 -function to check if a square is attacked + print attacks of one side                                                      -done
--generate_move function
+-generate_move function                                                                                                     -done
 -encoding moves and helper functions                                                                                        -done
+-calculate move score
+-make_move function
