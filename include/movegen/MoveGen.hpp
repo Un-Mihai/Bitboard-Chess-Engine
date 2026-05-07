@@ -102,3 +102,6 @@ void generate_pawn_captures(MoveList& move_list);
 
 template <int SIDE>
 void generate_king_moves(MoveList& move_list);
+
+template <int SIDE>
+void generate_knight_moves(MoveList& move_list);

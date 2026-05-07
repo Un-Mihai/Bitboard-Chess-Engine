@@ -16,6 +16,7 @@ void generate_all_moves(MoveList& move_list){
     generate_pawn_captures<SIDE>(move_list);
     generate_pawn_pushes<SIDE>(move_list);
     generate_king_moves<SIDE>(move_list);
+    generate_knight_moves<SIDE>(move_list);
 }
 
 template <int SIDE>
@@ -199,4 +200,33 @@ void generate_king_moves(MoveList& move_list){
         target_square = pop_lsb(king_quiet_moves);
         move_list.add_move(encode_move(king_position, target_square, 0));
     }
+}
+
+template <int SIDE>
+void generate_knight_moves(MoveList& move_list){
+    int source_square, target_square;
+    constexpr int piece = (SIDE == white) ? Pieces::N : Pieces::n;
+    U64 knights = pieces_bitboards[piece];
+    U64 friendly_occupancies = occupancies_bitboards[SIDE];
+    U64 oponent_occupancies = occupancies_bitboards[SIDE^1];
+
+    while (knights){
+        source_square = pop_lsb(knights);
+        U64 attacks = knight_attacks[source_square] & ~friendly_occupancies;
+
+        // --------------- CAPTURES -----------------
+        U64 knight_captures = attacks & oponent_occupancies;
+        while (knight_captures){
+            target_square = pop_lsb(knight_captures);
+            move_list.add_move(encode_move(source_square, target_square, 4));
+        }
+
+        // --------------- QUIET MOVES -----------------
+        U64 knight_quiet_targets = attacks & ~oponent_occupancies;
+        while(knight_quiet_targets){
+            target_square = pop_lsb(knight_quiet_targets);
+            move_list.add_move(encode_move(source_square, target_square, 0));
+        }
+    }
+    
 }

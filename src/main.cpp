@@ -96,7 +96,16 @@ int main() {
 
    for (int i = 0; i < move_list.count; i ++){
       U32 move = move_list.moves[i];
-      std :: cout << "Mutarea " << i << ": " << square_to_coordinates[get_move_source_square(move)] << " to "
-                                             << square_to_coordinates[get_move_target_square(move)] << '\n';
+      int flags = get_move_flags(move);
+      
+      std::cout << "Mutarea " << i+1 << ": " 
+                << square_to_coordinates[get_move_source_square(move)] << "->"
+                << square_to_coordinates[get_move_target_square(move)] 
+                << " | Captura: " << (is_move_capture(move) ? "Da" : "Nu")
+                << " | Promovare: " << (is_move_promotion(move) ? "Da" : "Nu")
+                << " | EP: " << (is_move_enpassant(move) ? "Da" : "Nu")
+                << " | DoublePush: " << (is_move_double_pawn_push(move) ? "Da" : "Nu")
+                << " | Rocada(K/Q): " << is_move_king_castle(move) << "/" << is_move_queen_castle(move)
+                << " | Flags: " << flags << '\n';
    }
 } 
