@@ -48,6 +48,7 @@ void parse_fen_string(const char* fen){
    //reset main bitboards and occupancies
    memset(pieces_bitboards, 0ULL, sizeof(pieces_bitboards));
    memset(occupancies_bitboards, 0ULL, sizeof(occupancies_bitboards));
+   board.clear_board();
 
    //reset game state variables
    side = 0;
@@ -77,6 +78,7 @@ void parse_fen_string(const char* fen){
             }
 
             setBit(pieces_bitboards[piece], square);
+            board.set_piece(square, piece);
             *fen ++;
             continue;
          }

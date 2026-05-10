@@ -32,7 +32,7 @@ inline const char* square_to_coordinates[] = {
 
 namespace Pieces {
    enum {
-      P, N, B, R, Q, K, p, n, b, r, q, k
+      P, N, B, R, Q, K, p, n, b, r, q, k, no_piece
    };
 }
 

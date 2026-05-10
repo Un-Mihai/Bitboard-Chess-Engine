@@ -52,5 +52,33 @@ void printBoard();
 
 void parse_fen_string(const char*);
 
+// array representing the piece placed on every square + useful functions
+struct Board_pieces{
+    int board_pieces[64];
 
+    inline int get_piece(int square) {return board_pieces[square];}
 
+    inline void set_piece(int square, int piece){
+        board_pieces[square] = piece;
+    }
+
+    inline void remove_piece(int square){
+        board_pieces[square] = Pieces::no_piece;
+    }
+
+    inline int remove_and_get_piece(int square){
+        int removed_piece = board_pieces[square];
+        board_pieces[square] = Pieces::no_piece;
+        return removed_piece;
+    }
+
+    inline void move_piece(int source_square, int target_square, int piece){
+        board_pieces[target_square] = piece;
+        board_pieces[source_square] = Pieces::no_piece;
+    }
+
+    inline void clear_board(){
+        for (int i = 0; i < 64; i ++)
+            board_pieces[i] = Pieces::no_piece;
+    }
+}inline board;     

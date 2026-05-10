@@ -53,6 +53,10 @@ inline int get_move_flags(U32 move){
     return (move >> 12) & 0xFU;
 }
 
+inline int get_promotion_type(U32 move){
+    return (move >> 12) & 0x3U;
+}
+
 inline int get_move_score(U32 move){
     return (move >> 16) & 0xFFFFU;
 }

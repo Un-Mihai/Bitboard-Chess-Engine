@@ -16,6 +16,11 @@ inline void clearBit(U64 &bitboard, int square) {
    bitboard &= ~(1ULL << square);
 }
 
+// works only if source bit = 1 and target bit = 0
+inline void moveBit(U64& bitboard, int source_square, int target_square){
+   bitboard ^= (1ULL << source_square) | (1ULL << target_square);
+}
+
 /*
 Description: Counts the bits in a bitboard
 Obs:  __builtin_popcountll forces the compiler to use POPCNT CPU instruction (fast method)

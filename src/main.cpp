@@ -1,5 +1,6 @@
 #include<iostream>
 #include<bitset>
+#include <cstdlib>
 
 #include "core/Types.hpp" //fisier in care definesc enum-urile si tipulde date U64 (e mai scurt) 
 #include "utils/BitManipulation.hpp" //fisier in care tinem functiile de manipulare a bitilor
@@ -9,6 +10,8 @@
 #include "core/Pieces.hpp" //in asta tinem bitboardurile cu pisese, si sirul cu unicodes pentru afisare
 #include "core/Init.hpp" //fisier care initializeaza ce avem nevoie
 #include "movegen/MoveGen.hpp"
+#include "movegen/MoveHandling.hpp"
+#include "core/Rules.hpp"
 
 //--------Windows only-----------
 #ifdef _WIN32
@@ -87,24 +90,33 @@ int main() {
    U32 move = encode_move(Squares::h1, Squares::h1, 0b0100, 0b1000000000000001);
    std::cout << std::bitset<32>(move) << '\n' << is_move_capture(move) << ' ' << is_move_promotion(move) << '\n';
 
-   parse_fen_string(fen_move_generation_testing);
+   parse_fen_string(fen_start_position_board);
    printBoard();
 
    MoveList move_list;
-   generate_moves(white, move_list);
+   srand(time(NULL));
 
-   for (int i = 0; i < move_list.count; i ++){
-      U32 move = move_list.moves[i];
-      int flags = get_move_flags(move);
-      
-      std::cout << "Mutarea " << i+1 << ": " 
-                << square_to_coordinates[get_move_source_square(move)] << "->"
-                << square_to_coordinates[get_move_target_square(move)] 
-                << " | Captura: " << (is_move_capture(move) ? "Da" : "Nu")
-                << " | Promovare: " << (is_move_promotion(move) ? "Da" : "Nu")
-                << " | EP: " << (is_move_enpassant(move) ? "Da" : "Nu")
-                << " | DoublePush: " << (is_move_double_pawn_push(move) ? "Da" : "Nu")
-                << " | Rocada(K/Q): " << is_move_king_castle(move) << "/" << is_move_queen_castle(move)
-                << " | Flags: " << flags << '\n';
+   while(true){
+      move_list.count = 0;
+      generate_moves(side, move_list);
+      int random_index = rand() % move_list.count;
+      make_move(move_list.moves[random_index]);
+      printBoard();
    }
+   // e un exit(0) in make_move in caz ca mutarea lasa regele in sah
+
+   // for (int i = 0; i < move_list.count; i ++){
+   //    U32 move = move_list.moves[i];
+   //    int flags = get_move_flags(move);
+      
+   //    std::cout << "Mutarea " << i+1 << ": " 
+   //              << square_to_coordinates[get_move_source_square(move)] << "->"
+   //              << square_to_coordinates[get_move_target_square(move)] 
+   //              << " | Captura: " << (is_move_capture(move) ? "Da" : "Nu")
+   //              << " | Promovare: " << (is_move_promotion(move) ? "Da" : "Nu")
+   //              << " | EP: " << (is_move_enpassant(move) ? "Da" : "Nu")
+   //              << " | DoublePush: " << (is_move_double_pawn_push(move) ? "Da" : "Nu")
+   //              << " | Rocada(K/Q): " << is_move_king_castle(move) << "/" << is_move_queen_castle(move)
+   //              << " | Flags: " << flags << '\n';
+   // }
 } 

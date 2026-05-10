@@ -83,6 +83,45 @@ void init_magic_numbers() {
     }
 }
 
+void init_board(){
+   // set all squares as empty
+   board.clear_board();
+
+   // set white pawns
+   for (int square = Squares::a2; square < Squares::h2; square ++)
+      board.set_piece(square, Pieces::P);
+
+   // set black pawns
+   for (int square = Squares::a7; square < Squares::h7; square ++)
+      board.set_piece(square, Pieces::p);
+
+   // rooks
+   board.set_piece(Squares::a1, Pieces::R);
+   board.set_piece(Squares::h1, Pieces::R);
+   board.set_piece(Squares::a8, Pieces::r);
+   board.set_piece(Squares::h8, Pieces::r);
+
+   // knights
+   board.set_piece(Squares::b1, Pieces::N);
+   board.set_piece(Squares::g1, Pieces::N);
+   board.set_piece(Squares::b8, Pieces::n);
+   board.set_piece(Squares::g8, Pieces::n);
+
+   // bishops
+   board.set_piece(Squares::c1, Pieces::B);
+   board.set_piece(Squares::f1, Pieces::B);
+   board.set_piece(Squares::f8, Pieces::b);
+   board.set_piece(Squares::c8, Pieces::b);
+
+   // queens
+   board.set_piece(Squares::d1, Pieces::Q);
+   board.set_piece(Squares::d8, Pieces::q);
+
+   // kings
+   board.set_piece(Squares::e1, Pieces::K);
+   board.set_piece(Squares::e8, Pieces::k);
+}
+
 void init_all(){
    init_magic_numbers();
 
@@ -97,4 +136,6 @@ void init_all(){
    init_bishop_attacks();
 
    init_blocks();
+
+   init_board();
 }

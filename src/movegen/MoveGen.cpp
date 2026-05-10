@@ -242,7 +242,8 @@ void generate_slider_piece_moves(MoveList& move_list){
     const U64 friendly_occ = occupancies_bitboards[SIDE];
     const U64 enemy_occ = occupancies_bitboards[SIDE ^ 1];
 
-    U64 pieces = pieces_bitboards[PIECE_TYPE];
+    //get the right pieces for each side
+    U64 pieces = pieces_bitboards[PIECE_TYPE + 6*SIDE];
 
     while (pieces) {
         source_square = pop_lsb(pieces);

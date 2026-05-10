@@ -30,6 +30,12 @@ inline int parse_piece_char_to_int(char c) {
     }
 }
 
+// easy acces to promoted piece based on side and move flags
+inline const int promotion_pieces[2][4]={
+    { Pieces::N, Pieces::B, Pieces::R, Pieces::Q },
+    { Pieces::n, Pieces::b, Pieces::r, Pieces::q }
+};
+
 /*-----------BITBOARDS FOR ALL KINDS OF PIECES----------*/
 
 //starting positions

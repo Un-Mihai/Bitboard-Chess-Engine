@@ -22,4 +22,7 @@ void init_blocks();
 //function used to initilaize the arrays for the magic numbers (the values can be hardcoded)
 void init_magic_numbers();
 
+// function to initialize the pieces on the board to starting position
+void init_board();
+
 void init_all();
