@@ -27,6 +27,63 @@ void setup_console() {
 }
 //---------------------------------
 
+long long count_moves(int depth) {
+    if (depth == 0) return 1ULL;
+
+    MoveList move_list;
+    generate_moves(side, move_list);
+
+    // La ultimul nivel doar numaram, nu mai facem recursivitate
+    if (depth == 1) {
+        long long count = 0;
+        for (int i = 0; i < move_list.count; i++) {
+            if (make_move(move_list.moves[i])) {
+                count++;
+                unmake_move(move_list.moves[i]);
+            }
+        }
+        return count;
+    }
+
+    long long nodes = 0;
+
+    for (int i = 0; i < move_list.count; i++) {
+        if (make_move(move_list.moves[i])) {
+            nodes += count_moves(depth - 1);
+            unmake_move(move_list.moves[i]);
+        }
+    }
+
+    return nodes;
+}
+
+void play_random_game(){
+   parse_fen_string(fen_start_position_board);
+   printBoard();
+
+   MoveList move_list;
+   srand(time(NULL));
+
+   for(int k = 1; k <= 100; k ++){
+      move_list.count = 0;
+      generate_moves(side, move_list);
+      while (true){
+         //std::getchar();
+         int random_index = rand() % move_list.count;
+         U32 move = move_list.moves[random_index];
+         if ( make_move(move) == false ){
+            std::cout << square_to_coordinates[get_move_source_square(move)] << " -> " 
+                      << square_to_coordinates[get_move_target_square(move)] << ": illegal move" << '\n';
+            printBoard();
+            std::cout << "Unmaking move..." << '\n';
+            std::cout << "State restored." << '\n';
+         }
+         else break;
+      }
+      printBoard();
+   }
+}
+
 int main() {
    setup_console();
 
@@ -86,24 +143,16 @@ int main() {
    // U64 rook_attacks = get_rook_attacks(Squares::d4, b);
    // printBitboard(rook_attacks);
 
+   //parse_fen_string(fen_kiwipete);
 
-   U32 move = encode_move(Squares::h1, Squares::h1, 0b0100, 0b1000000000000001);
-   std::cout << std::bitset<32>(move) << '\n' << is_move_capture(move) << ' ' << is_move_promotion(move) << '\n';
+   
+   //U32 move = encode_move(Squares::h1, Squares::h1, 0b0100, 0b1000000000000001);
+   //std::cout << std::bitset<32>(move) << '\n' << is_move_capture(move) << ' ' << is_move_promotion(move) << '\n';
 
-   parse_fen_string(fen_start_position_board);
-   printBoard();
+   //play_random_game();
 
-   MoveList move_list;
-   srand(time(NULL));
-
-   while(true){
-      move_list.count = 0;
-      generate_moves(side, move_list);
-      int random_index = rand() % move_list.count;
-      make_move(move_list.moves[random_index]);
-      printBoard();
-   }
-   // e un exit(0) in make_move in caz ca mutarea lasa regele in sah
+   parse_fen_string(fen_kiwipete);
+   std::cout << count_moves(5);
 
    // for (int i = 0; i < move_list.count; i ++){
    //    U32 move = move_list.moves[i];

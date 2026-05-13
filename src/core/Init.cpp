@@ -123,7 +123,7 @@ void init_board(){
 }
 
 void init_all(){
-   init_magic_numbers();
+   //init_magic_numbers();
 
    init_pawn_attacks();
 

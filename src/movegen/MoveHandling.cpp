@@ -7,7 +7,7 @@
 
 #include <cstdlib>
 
-void make_move(U32 move){
+bool make_move(U32 move){
     int source_square = get_move_source_square(move);
     int target_square = get_move_target_square(move);
     bool is_capture = is_move_capture(move);
@@ -108,10 +108,88 @@ void make_move(U32 move){
     int king_square = first_lsb(pieces_bitboards[king_type]);
     if (is_square_attacked(king_square, side)){
         unmake_move(move);
-        std::exit(0);
+        return false;
     }
+    return true;
 }
 
 void unmake_move(U32 move){
-    return;
+    int source_square = get_move_source_square(move);
+    int target_square = get_move_target_square(move);
+
+    int opponent_side = side;
+
+    // change the side to the one who made the move
+    side = side ^ 1;
+
+    Game_history::State past_state = game_history.pop_state();
+    castle = past_state.castle_rights;
+    enpassant = past_state.enpassant_square;
+    moves_remaining = past_state.fifty_move_counter;
+
+    int captured_piece = past_state.captured_piece;
+    int moving_piece = board.get_piece(target_square);
+
+
+    // remove the promoted piece and place the pawn instead
+    if (is_move_promotion(move)){
+        int promoted_piece = board.remove_and_get_piece(target_square);
+        moving_piece = Pieces::P + 6*side;
+        
+        board.set_piece(target_square, moving_piece);
+
+        clearBit(pieces_bitboards[promoted_piece], target_square);
+        setBit(pieces_bitboards[moving_piece], target_square);
+    }
+
+    // restore board and bitboards for the moving piece
+    board.move_piece(target_square, source_square, moving_piece);
+
+    moveBit(pieces_bitboards[moving_piece], target_square, source_square);
+    moveBit(occupancies_bitboards[side], target_square, source_square);
+
+    if (is_move_capture(move)){
+        // restore en passant captured pawn
+        if (is_move_enpassant(move)){
+            // target + 8 for white and  target - 8 for black
+            int captured_square =  target_square + 8 - 16*side;
+            board.set_piece(captured_square, captured_piece);
+            setBit(pieces_bitboards[captured_piece], captured_square);
+            setBit(occupancies_bitboards[opponent_side], captured_square);
+        }
+        else{
+            board.set_piece(target_square, captured_piece);
+            setBit(pieces_bitboards[captured_piece], target_square);
+            setBit(occupancies_bitboards[opponent_side], target_square);
+        }
+    } 
+   
+
+    if (is_move_king_castle(move)){
+        // calculate rook position based on king (works for both sides)
+        int rook_target_square = source_square + 3;
+        int rook_source_square = source_square + 1;
+
+        // move the rook in board and bitboard
+        int rook = board.remove_and_get_piece(rook_source_square);
+        board.set_piece(rook_target_square, rook);
+
+        moveBit(pieces_bitboards[rook], rook_source_square, rook_target_square);
+        moveBit(occupancies_bitboards[side], rook_source_square, rook_target_square);
+    }
+
+    if (is_move_queen_castle(move)){
+        // calculate rook position based on king (works for both sides)
+        int rook_target_square = source_square - 4;
+        int rook_source_square = source_square - 1;
+
+        // move the rook in board and bitboard
+        int rook = board.remove_and_get_piece(rook_source_square);
+        board.set_piece(rook_target_square, rook);
+
+        moveBit(pieces_bitboards[rook], rook_source_square, rook_target_square);
+        moveBit(occupancies_bitboards[side], rook_source_square, rook_target_square);
+    }
+    
+    occupancies_bitboards[both] = occupancies_bitboards[white] | occupancies_bitboards[black];
 }
