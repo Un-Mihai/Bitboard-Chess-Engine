@@ -1,6 +1,7 @@
 #include<iostream>
 #include<bitset>
 #include <cstdlib>
+#include <chrono>
 
 #include "core/Types.hpp" //fisier in care definesc enum-urile si tipulde date U64 (e mai scurt) 
 #include "utils/BitManipulation.hpp" //fisier in care tinem functiile de manipulare a bitilor
@@ -143,7 +144,7 @@ int main() {
    // U64 rook_attacks = get_rook_attacks(Squares::d4, b);
    // printBitboard(rook_attacks);
 
-   //parse_fen_string(fen_kiwipete);
+   
 
    
    //U32 move = encode_move(Squares::h1, Squares::h1, 0b0100, 0b1000000000000001);
@@ -151,8 +152,17 @@ int main() {
 
    //play_random_game();
 
-   parse_fen_string(fen_kiwipete);
-   std::cout << count_moves(5);
+   parse_fen_string(fen_start_position_board);
+
+   //parse_fen_string(fen_kiwipete);
+
+   auto start = std::chrono::high_resolution_clock::now();
+   std::cout << count_moves(7) << '\n';
+   auto stop = std::chrono::high_resolution_clock::now();
+
+   std::chrono::duration<double> durata = stop - start;
+   std::cout << "A durat " << durata.count() << " secunde\n";
+   
 
    // for (int i = 0; i < move_list.count; i ++){
    //    U32 move = move_list.moves[i];

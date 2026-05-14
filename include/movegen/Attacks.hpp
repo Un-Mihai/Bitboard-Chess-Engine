@@ -5,6 +5,7 @@
 #include "core/Types.hpp"
 #include "utils/BitManipulation.hpp"
 #include "MagicNumbers.hpp"
+#include "core/Board.hpp"
 
 /*---------PIECES ATTACKS FOR ALL SQUARES---------*/
 
@@ -100,7 +101,38 @@ inline U64 get_bishop_attacks(int square, U64 blocks){
 /*------------------------------------------------*/
 
 //checks whether a square is attacked by the side to move
-bool is_square_attacked(int square, int side_to_move);
+inline bool is_square_attacked(int square, int side_to_move){
+   int offset = side_to_move*6; // used to select the right color for pieces (values are: 0 for white, 6 for black)
+
+   // if a pawn of opposite color, hypothetically placed on the square, would attack an existing pawn 
+   // then the square is attacked by that existing pawn
+   if (pawn_attacks[1^side_to_move][square] & pieces_bitboards[Pieces::P + offset])
+      return 1;
+
+   //same for the other pieces
+
+   if (knight_attacks[square] & pieces_bitboards[Pieces::N + offset])
+      return 1;
+
+   if (king_attacks[square] & pieces_bitboards[Pieces::K + offset])
+      return 1;
+
+   // for the sliding pieces we must find the attacks for the specific current position
+   U64 occupancies = occupancies_bitboards[both];
+
+   // check horizontal queen attack or rook attack
+   if (get_rook_attacks(square, occupancies) & (pieces_bitboards[Pieces::R + offset] |
+                                                pieces_bitboards[Pieces::Q + offset] ))
+      return 1;
+
+   // check diagonal queen attack or bishop attack
+   if (get_bishop_attacks(square, occupancies) & (pieces_bitboards[Pieces::B + offset] |
+                                                pieces_bitboards[Pieces::Q + offset] ))
+      return 1;
+
+   // else, the square is not attacked
+   return 0;
+}
 
 //creates a bitboard marking the attacked squares
 U64 attacked_squares(int side_to_move);

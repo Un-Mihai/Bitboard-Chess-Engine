@@ -84,3 +84,12 @@ Am adaugat 3 flaguri:
 -flto (permite sa se faca inlocuirile inline a functiilor declarate intr-un fisier si folosite in altul)
 
 Vezi readme pentru utlizare.
+
+------------- Observatii ------------------
+
+Am mutat functiile make_move si unmake_move din MoveHandling.cpp in hpp ca sa le fac inline.
+    Timpul de generare s-a imbunatatit cu:
+        - 20% pentru 200 milioane noduri
+        - 30% pentru 8 miliarde noduri
+La fel am mutat si is_square_attacked: +15% performanta
+Deocamdata las doar atat ca sa nu mut tot proiectul in headere dar cred ca si functiile din MoveGen.cpp ar fi mult mai rapide inline

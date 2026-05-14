@@ -1,6 +1,5 @@
 #pragma once
 
-#include "movegen/Attacks.hpp"
 #include "Types.hpp"
 #include "Pieces.hpp"
 

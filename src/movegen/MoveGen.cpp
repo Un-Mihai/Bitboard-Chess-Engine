@@ -3,6 +3,7 @@
 #include "core/Board.hpp"
 #include "core/Logger.hpp"
 #include "core/Rules.hpp"
+#include "movegen/Attacks.hpp"
 
 void generate_moves(int side, MoveList& move_list){
     if (side == white)
