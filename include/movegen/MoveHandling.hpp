@@ -1,4 +1,4 @@
-
+#include "Attacks.hpp"
 #include "core/Types.hpp"
 #include "movegen/MoveGen.hpp"
 #include "core/Rules.hpp"

@@ -13,6 +13,8 @@ inline const char* fen_killer_position_board = "rnbqkb1r/pp1p1pPp/8/2p1pP2/1P1P4
 inline const char* fen_cmk_position_board = "r2q1rk1/ppp2ppp/2n1bn2/2b1p3/3pP3/3P1NPP/PPP1NPB1/R1BQ1RK1 b - - 0 9 ";
 inline const char* fen_move_generation_testing = "r3k2r/pPppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq c6 0 1 ";
 inline const char* fen_kiwipete = "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq - 0 1 ";
+inline const char* fen_test_1 = "r3k2r/Pppp1ppp/1b3nbN/nP6/BBP1P3/q4N2/Pp1P2PP/R2Q1RK1 w kq - 0 1 ";
+inline const char* fen_test_2 = "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - - 0 1 ";
 
 
 /*-----------------MAIN BITBOARDS---------------------*/

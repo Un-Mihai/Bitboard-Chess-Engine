@@ -1,7 +1,7 @@
 #include<iostream>
 #include<bitset>
 #include <cstdlib>
-#include <chrono>
+
 
 #include "core/Types.hpp" //fisier in care definesc enum-urile si tipulde date U64 (e mai scurt) 
 #include "utils/BitManipulation.hpp" //fisier in care tinem functiile de manipulare a bitilor
@@ -13,6 +13,7 @@
 #include "movegen/MoveGen.hpp"
 #include "movegen/MoveHandling.hpp"
 #include "core/Rules.hpp"
+#include "tests/MoveGenTests.hpp"
 
 //--------Windows only-----------
 #ifdef _WIN32
@@ -27,36 +28,6 @@ void setup_console() {
 #endif
 }
 //---------------------------------
-
-long long count_moves(int depth) {
-    if (depth == 0) return 1ULL;
-
-    MoveList move_list;
-    generate_moves(side, move_list);
-
-    // La ultimul nivel doar numaram, nu mai facem recursivitate
-    if (depth == 1) {
-        long long count = 0;
-        for (int i = 0; i < move_list.count; i++) {
-            if (make_move(move_list.moves[i])) {
-                count++;
-                unmake_move(move_list.moves[i]);
-            }
-        }
-        return count;
-    }
-
-    long long nodes = 0;
-
-    for (int i = 0; i < move_list.count; i++) {
-        if (make_move(move_list.moves[i])) {
-            nodes += count_moves(depth - 1);
-            unmake_move(move_list.moves[i]);
-        }
-    }
-
-    return nodes;
-}
 
 void play_random_game(){
    parse_fen_string(fen_start_position_board);
@@ -104,7 +75,7 @@ int main() {
    // for (int i = 0; i < 64; i ++)
    //    printBitboard(knight_attacks[i]);
 
-    uint64_t b = empty_bitboard;
+   //uint64_t b = empty_bitboard;
    // for(int rank = 0; rank < 8; rank ++){
    //    for (int file = 0; file < 6; file ++){
    //       setBit(b, rank * 8 + file);
@@ -153,16 +124,8 @@ int main() {
    //play_random_game();
 
    parse_fen_string(fen_start_position_board);
-
-   //parse_fen_string(fen_kiwipete);
-
-   auto start = std::chrono::high_resolution_clock::now();
-   std::cout << count_moves(7) << '\n';
-   auto stop = std::chrono::high_resolution_clock::now();
-
-   std::chrono::duration<double> durata = stop - start;
-   std::cout << "A durat " << durata.count() << " secunde\n";
    
+   test_move_generation_complex();
 
    // for (int i = 0; i < move_list.count; i ++){
    //    U32 move = move_list.moves[i];
